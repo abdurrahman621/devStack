@@ -1,10 +1,11 @@
+import Navbar from "./components/Navber"
 
 function App() {
 
   return (
     <>
+    <Navbar></Navbar>
     
-       <h2  className=" flex items-cen text-red-600 font-bold text-7xl">Abdur Rahman</h2>
     </>
   )
 }
