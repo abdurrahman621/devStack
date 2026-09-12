@@ -33,7 +33,7 @@ const Navbar = () => {
                     <div>
                         <img src={Logo} alt="DevStack" />
                     </div>
-                    <div className="flex items-center gab-3">
+                    <div className="flex items-center gap-3">
                         <button className="text-sm">Sign In</button>
                         <button className="rounded-full bg-[#D91B7E] px-3 py-1.5 text-sm text-white">Sign Up</button>
                     </div>
