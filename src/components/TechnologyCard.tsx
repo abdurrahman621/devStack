@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import type { ITechnology } from "../Types/type";
 import YourStack from "./yourStack";
 
@@ -22,18 +23,18 @@ function TechnologyCard() {
         console.log(error);
         setLoading(false);
       }
-    };
+    }
 
     loadTechnologies();
-  }, []);
+  }, [])
 
   const handleAddToStack = (technology: ITechnology) => {
     const alreadyExists = selectedTechnologies.some(
       (item) => item.id === technology.id
-    );
+    )
 
     if (alreadyExists) {
-      alert(`${technology.name} is already in your stack!`);
+      toast.warning(`${technology.name} is already in your stack!`);
       return;
     }
 
@@ -41,18 +42,34 @@ function TechnologyCard() {
       ...selectedTechnologies,
       technology,
     ]);
+
+    toast.success(`${technology.name} added to your stack!`);
   };
 
   const handleRemove = (id: number) => {
+    const technology = selectedTechnologies.find(
+      (item) => item.id === id
+    );
+
     const remainingTechnologies = selectedTechnologies.filter(
-      (technology) => technology.id !== id
+      (item) => item.id !== id
     );
 
     setSelectedTechnologies(remainingTechnologies);
+
+    if (technology) {
+      toast.info(`${technology.name} removed from your stack!`);
+    }
   };
 
   const handleRemoveAll = () => {
+    if (selectedTechnologies.length === 0) {
+      return;
+    }
+
     setSelectedTechnologies([]);
+
+    toast.info("All technologies removed from your stack!");
   };
 
   if (loading) {
@@ -73,12 +90,11 @@ function TechnologyCard() {
     <section className="py-20">
       <div className="mx-auto max-w-7xl px-5">
 
-
+        {/* Section Heading */}
         <div className="mb-10">
           <h2 className="text-3xl font-bold text-slate-900">
             Explore the{" "}
-            <span className="bg-linear-to-r from-[#FF5722]
-                         via-[#D81B7E] to-[#7C3AED] bg-clip-text text-transparent">
+            <span className="bg-linear-to-r from-[#FF5722] via-[#D81B7E] to-[#7C3AED] bg-clip-text text-transparent">
               Technologies
             </span>
           </h2>
@@ -88,12 +104,11 @@ function TechnologyCard() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 gap-6 lg:grid-cols-4">
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-12">
 
-          <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:col-span-3">
+          <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:col-span-9 lg:grid-cols-3">
 
             {technologies.map((technology) => {
-
               const isAdded = selectedTechnologies.some(
                 (item) => item.id === technology.id
               );
@@ -124,7 +139,7 @@ function TechnologyCard() {
                     {technology.name}
                   </h3>
 
-                  <p className="mt-2 min-height: 60px text-sm leading-5 text-slate-500">
+                  <p className="mt-2 min-height: 60px; text-sm leading-5 text-slate-500">
                     {technology.description}
                   </p>
 
@@ -148,14 +163,14 @@ function TechnologyCard() {
 
                   </div>
 
+                  {/* Add to Stack Button */}
                   <button
                     onClick={() => handleAddToStack(technology)}
                     disabled={isAdded}
-                    className={`mt-5 w-full rounded-md py-3 text-sm font-medium transition ${
-                      isAdded
-                        ? "cursor-not-allowed bg-slate-300 text-slate-600"
-                        : "bg-slate-950 text-white hover:bg-slate-800"
-                    }`}
+                    className={`mt-5 w-full rounded-md py-3 text-sm font-medium transition ${isAdded
+                      ? "cursor-not-allowed bg-slate-300 text-slate-600"
+                      : "bg-slate-950 text-white hover:bg-slate-800"
+                      }`}
                   >
                     {isAdded
                       ? "✓ Added to Stack"
@@ -168,7 +183,7 @@ function TechnologyCard() {
 
           </div>
 
-          <div className="lg:col-span-1">
+          <div className="lg:col-span-3">
             <YourStack
               selectedTechnologies={selectedTechnologies}
               onRemove={handleRemove}
