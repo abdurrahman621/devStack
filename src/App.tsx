@@ -1,5 +1,6 @@
 import Hero from "./components/Hero"
 import Navbar from "./components/Navber"
+import TechnologySection from "./components/TechnologyCard"
 
 function App() {
 
@@ -7,6 +8,7 @@ function App() {
     <>
     <Navbar></Navbar>
     <Hero></Hero>
+    <TechnologySection></TechnologySection>
     </>
   )
 }
