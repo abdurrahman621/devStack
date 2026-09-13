@@ -163,7 +163,6 @@ function TechnologyCard() {
 
                   </div>
 
-                  {/* Add to Stack Button */}
                   <button
                     onClick={() => handleAddToStack(technology)}
                     disabled={isAdded}
