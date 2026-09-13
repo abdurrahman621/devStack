@@ -8,6 +8,7 @@ function TechnologyCard() {
   const [selectedTechnologies, setSelectedTechnologies] = useState<
     ITechnology[]
   >([]);
+
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
