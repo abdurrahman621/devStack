@@ -1,14 +1,18 @@
 import Hero from "./components/Hero"
 import Navbar from "./components/Navber"
-import TechnologySection from "./components/TechnologyCard"
+import TechnologyCard from "./components/TechnologyCard";
+import YourStack from "./components/yourStack";
+
 
 function App() {
 
   return (
     <>
-    <Navbar></Navbar>
-    <Hero></Hero>
-    <TechnologySection></TechnologySection>
+      <Navbar></Navbar>
+      <Hero></Hero>
+      <TechnologyCard></TechnologyCard>
+      
+      
     </>
   )
 }
